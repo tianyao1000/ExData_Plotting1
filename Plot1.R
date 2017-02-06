@@ -19,15 +19,16 @@ skip_row_index<-min(which(date==date1))
 last_row_index<-min(which(date==date2))
 read_row_num<-last_row_index-skip_row_index 
 
-
+## load data
 content<-fread(filename,skip=skip_row_index,nrow=read_row_num)
-
+## set column names
 colnames(content)<-column_names
 
 ##Convert to date class
 date_time<-mapply(paste,content$Date,content$Time)
 content$data_time<-dmy_hms(date_time,tz="America/los_angeles")
 
+##plot the data
 par(mfrow=c(1,1))
 
 dimension<-480

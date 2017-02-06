@@ -19,18 +19,17 @@ skip_row_index<-min(which(date==date1))
 last_row_index<-min(which(date==date2))
 read_row_num<-last_row_index-skip_row_index 
 
-
+## load the data
 content<-fread(filename,skip=skip_row_index,nrow=read_row_num)
 
 colnames(content)<-column_names
 
-hist(content$Global_active_power,col="red",main=column_names[3])
 
 ##Convert to date class
 date_time<-mapply(paste,content$Date,content$Time)
 content$data_time<-dmy_hms(date_time,tz="America/los_angeles")
 
-par(mfrow=c(1,1))
+## plot the data
 
 dimension<-480
 png("Plot4.png",width=dimension,height=dimension)
